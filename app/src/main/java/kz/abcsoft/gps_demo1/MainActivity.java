@@ -1,19 +1,25 @@
 package kz.abcsoft.gps_demo1;
 
 import android.content.pm.PackageManager;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    TextView intoTextView ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        intoTextView = (TextView)findViewById(R.id.intoTextView) ;
+
+        checkEnableGPS();
 
         PackageManager pm = getPackageManager() ;
 
@@ -21,6 +27,17 @@ public class MainActivity extends ActionBarActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    private void checkEnableGPS(){
+        String provider = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.LOCATION_PROVIDERS_ALLOWED) ;
+
+        if(!provider.equals("")){
+            intoTextView.setText("GPS қосылып тұр: " + provider);
+        }
+        else{
+            intoTextView.setText("GPS өшіп тұр");
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
