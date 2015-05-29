@@ -1,11 +1,13 @@
 package kz.abcsoft.gps_demo1;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,5 +60,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onclick(View view) {
+        Intent gpsOptionsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS) ;
+        startActivity(gpsOptionsIntent);
     }
 }
